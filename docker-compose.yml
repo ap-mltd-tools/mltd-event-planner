@@ -1,0 +1,39 @@
+version: "3.9"
+
+services:
+
+  spring:
+    build: ./event-planner-api
+    ports:
+      - "8080:8080"
+
+  caddy:
+    image: caddy:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./infra/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - spring
+      - react
+
+  react:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    
+    command: npm run dev -- --host
+
+volumes:
+  caddy_data:
+  caddy_config:

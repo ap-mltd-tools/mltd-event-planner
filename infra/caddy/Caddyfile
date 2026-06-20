@@ -1,0 +1,15 @@
+localhost:443 {
+    # Spring Boot API
+        handle /discord/* {
+        reverse_proxy spring:8080
+    }
+
+    handle /api/* {
+        reverse_proxy spring:8080
+    }
+
+    # React
+    handle {
+        reverse_proxy react:5173
+    }
+}

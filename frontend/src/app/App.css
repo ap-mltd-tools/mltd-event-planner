@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  position: relative;
+  height: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 72px;
+}
+
+.header-title {
+  text-align: center;
+  margin: 0;
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
+}
+
+.language-select {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  padding: 8px 8px;
+}
+
+.auth {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-button {
+  padding: 16px 24px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.content {
+  width: 100%;
+  max-width: 640px;
+  margin: 24px auto 0;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+.container {
+  width: 100%;
+  display: grid;
+  gap: 8px;
+}
+
+.container * {
+  min-width: 0;
+}
+
+.time-input-row {
+  display: flex;
+  gap: 12px;
+}
+
+.time-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.time-group input {
+  width: 80px;
+}
