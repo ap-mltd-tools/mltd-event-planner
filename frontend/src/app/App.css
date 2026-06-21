@@ -50,11 +50,21 @@
 .tabs {
   display: flex;
   justify-content: center;
-  align-items: center;
+  gap: 8px;
+}
+
+.tab {
+  flex: 1;
+  padding: 8px 8px;
+  white-space: nowrap;
+  min-width: 100px;
   text-align: center;
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   width: 100%;
   max-width: 640px;
   margin: 24px auto 0;
@@ -63,18 +73,32 @@
   border: 1px solid #ddd;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  text-align: center;
+  text-align: left;
   overflow-wrap: break-word;
 }
 
-.container {
-  width: 100%;
-  display: grid;
-  gap: 8px;
+.section {
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
-.container * {
-  min-width: 0;
+.section h2 {
+  margin: 0;
+}
+
+.description {
+  white-space: pre-line;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+input {
+  padding: 4px 8px;
 }
 
 .time-input-row {

@@ -27,13 +27,13 @@ export default function Dashboard() {
       <Header />
 
       <nav className="tabs">
-        <button
+        <button className="tab"
           onClick={() => setTab("home")}
         >
           {t("dashboard.home")}
         </button>
 
-        <button
+        <button className="tab"
           onClick={() => setTab("calculate")}
         >
           {t("dashboard.stockAndSpendPlayCalculator")}

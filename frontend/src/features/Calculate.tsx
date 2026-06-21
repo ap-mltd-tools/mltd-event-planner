@@ -142,350 +142,355 @@ export default function Calculate() {
   }
 
   return (
-  <div className="container">
-    <h2>{t("calculate.title")}</h2>
+  <>
+    <section className="section">
+      <h2>{t("calculate.title")}</h2>
+    </section>
 
-    <label>{t("calculate.labels.stockPlaysPerHour")}</label>
-    <input
-      name="stockPlaysPerHour"
-      placeholder=""
-      value={form.stockPlaysPerHour}
-      onChange={handleChange}
-      type="number"
-      onWheel={preventWheel}
-      min={0}
-      step="0.1"
-    />
-
-    <label>{t("calculate.labels.spendPlaysPerHour")}</label>
-    <input
-      name="spendPlaysPerHour"
-      placeholder=""
-      value={form.spendPlaysPerHour}
-      onChange={handleChange}
-      type="number"
-      onWheel={preventWheel}
-      min={0}
-      step="0.1"
-    />
-
-    <label>{t("calculate.labels.operatingTime")}</label>
-    <div className="time-input-row">
-      <div className="time-group">
-        <input
-          name="operatingHour"
-          value={form.operatingHour}
-          onChange={handleChange}
-          placeholder=""
-          type="number"
-          onWheel={preventWheel}
-          min={0}
-        />
-        <span>{t("common.time.hour")}</span>
-      </div>
-
-      <div className="time-group">
-        <input
-          name="operatingMinute"
-          value={form.operatingMinute}
-          onChange={handleChange}
-          placeholder=""
-          type="number"
-          onWheel={preventWheel}
-          min={0}
-          max={59}
-        />
-        <span>{t("common.time.minute")}</span>
-      </div>
-
-      <div className="time-group">
-        <input
-          name="operatingSecond"
-          value={form.operatingSecond}
-          onChange={handleChange}
-          placeholder=""
-          type="number"
-          onWheel={preventWheel}
-          min={0}
-          max={59}
-        />
-        <span>{t("common.time.second")}</span>
-      </div>
+    <div className="field">
+      <label>{t("calculate.labels.stockPlaysPerHour")}</label>
+      <input
+        name="stockPlaysPerHour"
+        placeholder=""
+        value={form.stockPlaysPerHour}
+        onChange={handleChange}
+        type="number"
+        onWheel={preventWheel}
+        min={0}
+        step="0.1"
+      />
     </div>
 
-    <label>{t("calculate.labels.startDashCount")}</label>
-    <input
-      name="startDashCount"
-      placeholder=""
-      value={form.startDashCount}
-      onChange={handleChange}
-      type="number"
-      onWheel={preventWheel}
-      min={0}
-    />
-
-    <label>{t("calculate.labels.startDashTime")}</label>
-    <div className="time-input-row">
-      <div className="time-group">
-        <input
-          name="startDashMinutePerLap"
-          value={form.startDashMinutePerLap}
-          onChange={handleChange}
-          placeholder=""
-          type="number"
-          onWheel={preventWheel}
-          min={0}
-          max={59}
-        />
-        <span>{t("common.time.minute")}</span>
-      </div>
-
-      <div className="time-group">
-        <input
-          name="startDashSecondPerLap"
-          value={form.startDashSecondPerLap}
-          onChange={handleChange}
-          placeholder=""
-          type="number"
-          onWheel={preventWheel}
-          min={0}
-          max={59}
-        />
-        <span>{t("common.time.second")}</span>
-      </div>
+    <div className="field">
+      <label>{t("calculate.labels.spendPlaysPerHour")}</label>
+      <input
+        name="spendPlaysPerHour"
+        placeholder=""
+        value={form.spendPlaysPerHour}
+        onChange={handleChange}
+        type="number"
+        onWheel={preventWheel}
+        min={0}
+        step="0.1"
+      />
     </div>
 
-    <label>{t("calculate.labels.skipTicketCount")}</label>
-      <div className="radio-group">
-        <label>
+    <div className="field">
+      <label>{t("calculate.labels.operatingTime")}</label>
+      <div className="time-input-row">
+        <div className="time-group">
           <input
-            type="radio"
-            name="skipTicketUsage"
-            value="SPEND"
-            checked={form.skipTicketUsage === "SPEND"}
+            name="operatingHour"
+            value={form.operatingHour}
             onChange={handleChange}
+            placeholder=""
+            type="number"
+            onWheel={preventWheel}
+            min={0}
           />
-          {t("calculate.options.useForSpend")}
-        </label>
-        <label>
+          <span>{t("common.time.hour")}</span>
+        </div>
+
+        <div className="time-group">
           <input
-            type="radio"
-            name="skipTicketUsage"
-            value="STOCK"
-            checked={form.skipTicketUsage === "STOCK"}
+            name="operatingMinute"
+            value={form.operatingMinute}
             onChange={handleChange}
+            placeholder=""
+            type="number"
+            onWheel={preventWheel}
+            min={0}
+            max={59}
           />
-          {t("calculate.options.useForStock")}
-        </label>
-      </div>
-    <input
-      name="skipTicketCount"
-      placeholder=""
-      value={form.skipTicketCount}
-      onChange={handleChange}
-      type="number"
-      onWheel={preventWheel}
-      min={0}
-    />
+          <span>{t("common.time.minute")}</span>
+        </div>
 
-    <label>{t("calculate.labels.skipTicketsTime")}</label>
-    <div className="time-input-row">
-      <div className="time-group">
-        <input
-          name="skipTicketsMinutePerPlay"
-          value={form.skipTicketsMinutePerPlay}
-          onChange={handleChange}
-          placeholder=""
-          type="number"
-          onWheel={preventWheel}
-          min={0}
-          max={59}
-        />
-        <span>{t("common.time.minute")}</span>
-      </div>
-
-      <div className="time-group">
-        <input
-          name="skipTicketsSecondPerPlay"
-          value={form.skipTicketsSecondPerPlay}
-          onChange={handleChange}
-          placeholder=""
-          type="number"
-          onWheel={preventWheel}
-          min={0}
-          max={59}
-        />
-        <span>{t("common.time.second")}</span>
+        <div className="time-group">
+          <input
+            name="operatingSecond"
+            value={form.operatingSecond}
+            onChange={handleChange}
+            placeholder=""
+            type="number"
+            onWheel={preventWheel}
+            min={0}
+            max={59}
+          />
+          <span>{t("common.time.second")}</span>
+        </div>
       </div>
     </div>
 
-    <label>{t("calculate.labels.tenTimesCount")}</label>
-    <input
-      name="tenTimesCount"
-      placeholder=""
-      value={form.tenTimesCount}
-      onChange={handleChange}
-      type="number"
-      onWheel={preventWheel}
-      min={0}
-    />
+    <div className="field">
+      <label>{t("calculate.labels.startDashCount")}</label>
+      <input
+        name="startDashCount"
+        placeholder=""
+        value={form.startDashCount}
+        onChange={handleChange}
+        type="number"
+        onWheel={preventWheel}
+        min={0}
+      />
+    </div>
 
-    <label>{t("calculate.labels.dailyTrigger")}</label>
-    <input
-      name="dailyTrigger"
-      placeholder=""
-      value={form.dailyTrigger}
-      onChange={handleChange}
-      type="number"
-      onWheel={preventWheel}
-      min={0}
-      step="10"
-    />
+    <div className="field">
+      <label>{t("calculate.labels.startDashTime")}</label>
+      <div className="time-input-row">
+        <div className="time-group">
+          <input
+            name="startDashMinutePerLap"
+            value={form.startDashMinutePerLap}
+            onChange={handleChange}
+            placeholder=""
+            type="number"
+            onWheel={preventWheel}
+            min={0}
+            max={59}
+          />
+          <span>{t("common.time.minute")}</span>
+        </div>
 
-    <label>{t("calculate.labels.initialTrigger")}</label>
-    <input
-      name="initialTrigger"
-      placeholder=""
-      value={form.initialTrigger}
-      onChange={handleChange}
-      type="number"
-      onWheel={preventWheel}
-      min={0}
-      step="1"
-    />
-
-    <label>{t("calculate.labels.targetRemainingTrigger")}</label>
-    <input
-      name="targetRemainingTrigger"
-      placeholder=""
-      value={form.targetRemainingTrigger}
-      onChange={handleChange}
-      type="number"
-      onWheel={preventWheel}
-      min={0}
-      step="1"
-    />
-
-    <label>{t("calculate.labels.songStartTransitionCount")}</label>
-    <input
-      name="songStartTransitionCount"
-      placeholder=""
-      value={form.songStartTransitionCount}
-      onChange={handleChange}
-      type="number"
-      onWheel={preventWheel}
-      min={0}
-    />
-
-    <label>{t("calculate.labels.songStartTransitionSecond")}</label>
-    <div className="time-input-row">
-      <div className="time-group">
-        <input
-          name="songStartTransitionSecond"
-          value={form.songStartTransitionSecond}
-          onChange={handleChange}
-          placeholder=""
-          type="number"
-          onWheel={preventWheel}
-          min={0}
-          max={59}
-        />
-        <span>{t("common.time.second")}</span>
+        <div className="time-group">
+          <input
+            name="startDashSecondPerLap"
+            value={form.startDashSecondPerLap}
+            onChange={handleChange}
+            placeholder=""
+            type="number"
+            onWheel={preventWheel}
+            min={0}
+            max={59}
+          />
+          <span>{t("common.time.second")}</span>
+        </div>
       </div>
     </div>
 
-    <button onClick={handleSubmit}>
-      {t("calculate.actions.calculate")}
-    </button>
+    <div className="field">
+      <label>{t("calculate.labels.skipTicketCount")}</label>
+        <div className="radio-group">
+          <label>
+            <input
+              type="radio"
+              name="skipTicketUsage"
+              value="SPEND"
+              checked={form.skipTicketUsage === "SPEND"}
+              onChange={handleChange}
+            />
+            {t("calculate.options.useForSpend")}
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="skipTicketUsage"
+              value="STOCK"
+              checked={form.skipTicketUsage === "STOCK"}
+              onChange={handleChange}
+            />
+            {t("calculate.options.useForStock")}
+          </label>
+        </div>
+      <input
+        name="skipTicketCount"
+        placeholder=""
+        value={form.skipTicketCount}
+        onChange={handleChange}
+        type="number"
+        onWheel={preventWheel}
+        min={0}
+      />
+    </div>
 
-    {loading && <p>{t("calculate.loading")}</p>}
-
-    {result && (
-      <div style={{ marginTop: 12}}>
-        <h3>{t("calculate.result.title")}</h3>
-
-        <div>
-          {t(
-            "calculate.result.stockPlayCount",
-            {
-              count:
-                result.stockPlayCount,
-
-              skip:
-                result.skipTicketStockPlayCount
-            }
-          )}
+    <div className="field">
+      <label>{t("calculate.labels.skipTicketsTime")}</label>
+      <div className="time-input-row">
+        <div className="time-group">
+          <input
+            name="skipTicketsMinutePerPlay"
+            value={form.skipTicketsMinutePerPlay}
+            onChange={handleChange}
+            placeholder=""
+            type="number"
+            onWheel={preventWheel}
+            min={0}
+            max={59}
+          />
+          <span>{t("common.time.minute")}</span>
         </div>
 
-        <div>
-          {t(
-            "calculate.result.spendPlayCount",
-            {
-              count:
-                result.spendPlayCount,
-
-              skip:
-                result.skipTicketSpendPlayCount,
-
-              ten:
-                result.tenTimesSpendPlayCount
-            }
-          )}
+        <div className="time-group">
+          <input
+            name="skipTicketsSecondPerPlay"
+            value={form.skipTicketsSecondPerPlay}
+            onChange={handleChange}
+            placeholder=""
+            type="number"
+            onWheel={preventWheel}
+            min={0}
+            max={59}
+          />
+          <span>{t("common.time.second")}</span>
         </div>
+      </div>
+    </div>
 
-        <div>
-          {t(
-            "calculate.result.stockSeconds",
-            toTimeParts(
-              result.stockSeconds
-            )
-          )}
+    <div className="field">
+      <label>{t("calculate.labels.tenTimesCount")}</label>
+      <input
+        name="tenTimesCount"
+        placeholder=""
+        value={form.tenTimesCount}
+        onChange={handleChange}
+        type="number"
+        onWheel={preventWheel}
+        min={0}
+      />
+    </div>
+
+    <div className="field">
+      <label>{t("calculate.labels.dailyTrigger")}</label>
+      <input
+        name="dailyTrigger"
+        placeholder=""
+        value={form.dailyTrigger}
+        onChange={handleChange}
+        type="number"
+        onWheel={preventWheel}
+        min={0}
+        step="10"
+      />
+    </div>
+
+    <div className="field">
+      <label>{t("calculate.labels.initialTrigger")}</label>
+      <input
+        name="initialTrigger"
+        placeholder=""
+        value={form.initialTrigger}
+        onChange={handleChange}
+        type="number"
+        onWheel={preventWheel}
+        min={0}
+        step="1"
+      />
+    </div>
+
+    <div className="field">
+      <label>{t("calculate.labels.targetRemainingTrigger")}</label>
+      <input
+        name="targetRemainingTrigger"
+        placeholder=""
+        value={form.targetRemainingTrigger}
+        onChange={handleChange}
+        type="number"
+        onWheel={preventWheel}
+        min={0}
+        step="1"
+      />
+    </div>
+
+    <div className="field">
+      <label>{t("calculate.labels.songStartTransitionCount")}</label>
+      <input
+        name="songStartTransitionCount"
+        placeholder=""
+        value={form.songStartTransitionCount}
+        onChange={handleChange}
+        type="number"
+        onWheel={preventWheel}
+        min={0}
+      />
+    </div>
+
+    <div className="field">
+      <label>{t("calculate.labels.songStartTransitionSecond")}</label>
+      <div className="time-input-row">
+        <div className="time-group">
+          <input
+            name="songStartTransitionSecond"
+            value={form.songStartTransitionSecond}
+            onChange={handleChange}
+            placeholder=""
+            type="number"
+            onWheel={preventWheel}
+            min={0}
+            max={59}
+          />
+          <span>{t("common.time.second")}</span>
         </div>
+      </div>
+    </div>
 
-        <div>
-          {t(
-            "calculate.result.spendSeconds",
-            toTimeParts(
-              result.spendSeconds
-            )
-          )}
-        </div>
+    <div className="field">
+      <button onClick={handleSubmit}>
+        {t("calculate.actions.calculate")}
+      </button>
+    </div>
 
-        <div>
-          {t(
-            "calculate.result.startDashSeconds",
-            {
-            ...toTimeParts(
-              result.startDashSeconds
-            ),
+    <div className="field">
+      {loading && <p>{t("calculate.loading")}</p>}
+    </div>
 
-            count:
-              result.startDashStockCount
-            }
-          )}
-        </div>
+      {result && (
+        <div className="field">
+          <h3>{t("calculate.result.title")}</h3>
 
           <div>
-          {t(
-            "calculate.result.remainingSeconds",
-            toTimeParts(
-              result.remainingSeconds
-            )
-          )}
-        </div>
+            {t("calculate.result.stockPlayCount",
+              {
+                count: result.stockPlayCount,
+                skip: result.skipTicketStockPlayCount
+              }
+            )}
+          </div>
 
-        <div>
-          {t(
-            "calculate.result.remainingTriggers",
-            {
-              count:
-                result.remainingTriggers
-            }
-          )}
+          <div>
+            {t("calculate.result.spendPlayCount",
+              {
+                count: result.spendPlayCount,
+                skip: result.skipTicketSpendPlayCount,
+                ten: result.tenTimesSpendPlayCount
+              }
+            )}
+          </div>
+
+          <div>
+            {t("calculate.result.stockSeconds",
+              toTimeParts(result.stockSeconds)
+            )}
+          </div>
+
+          <div>
+            {t("calculate.result.spendSeconds",
+              toTimeParts(result.spendSeconds)
+            )}
+          </div>
+
+          <div>
+            {t("calculate.result.startDashSeconds",
+              {
+              ...toTimeParts(result.startDashSeconds),
+              count: result.startDashStockCount
+              }
+            )}
+          </div>
+
+          <div>
+            {t("calculate.result.remainingSeconds",
+              toTimeParts(result.remainingSeconds)
+            )}
+          </div>
+
+          <div>
+            {t("calculate.result.remainingTriggers",
+              {
+                count: result.remainingTriggers
+              })}
+          </div>
         </div>
-      </div>
-    )}
-  </div>
+      )}
+  </>
   );
 }
 
