@@ -6,16 +6,18 @@ WORKDIR /frontend
 COPY frontend/package*.json ./
 RUN npm ci
 
-# Spring build
 COPY frontend/ ./
 RUN npm run build
 
-FROM gradle:8.7-jdk21 AS backend-build
+# Spring build
+FROM eclipse-temurin:21-jdk AS backend-build
 
 WORKDIR /app
 
 COPY event-planner-api/ ./
-RUN gradle bootJar
+
+RUN chmod +x gradlew
+RUN ./gradlew clean bootJar
 
 # Runtime
 FROM eclipse-temurin:21-jdk
