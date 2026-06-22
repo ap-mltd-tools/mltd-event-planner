@@ -9,13 +9,11 @@ services:
 
   caddy:
     image: caddy:latest
-    environment:
-      - REACT_PORT=5173
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./infra/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./infra/caddy/dev/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
@@ -26,7 +24,6 @@ services:
   react:
     build:
       context: ./frontend
-      target: dev
     ports:
       - "5173:5173"
 
