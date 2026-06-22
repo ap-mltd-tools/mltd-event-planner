@@ -10,7 +10,7 @@ COPY frontend/ ./
 RUN npm run build
 
 # Spring build
-FROM eclipse-temurin:21-jdk AS backend-build
+FROM eclipse-temurin:17-jdk AS backend-build
 
 WORKDIR /app
 
@@ -20,7 +20,7 @@ RUN chmod +x gradlew
 RUN ./gradlew clean bootJar
 
 # Runtime
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 
