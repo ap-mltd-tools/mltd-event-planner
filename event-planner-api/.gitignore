@@ -35,5 +35,4 @@ out/
 .kotlin
 
 # Environment
-application.properties
 local.properties
