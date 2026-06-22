@@ -26,9 +26,9 @@
     }
 
     # React
-    root * /srv/react
-    encode gzip
-
-    try_files {path} /index.html
-    file_server
+    handle {
+        root * /srv/react
+        try_files {path} /index.html
+        file_server
+    }
 }
