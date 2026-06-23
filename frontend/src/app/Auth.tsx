@@ -16,7 +16,7 @@ export default function AuthPage() {
       params.delete("auth")
       window.history.replaceState({}, "", "/")
     }
-  })
+  }, [])
 
   return (
     <main className="app">
