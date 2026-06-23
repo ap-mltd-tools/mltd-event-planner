@@ -1,6 +1,7 @@
 package ap.eventplanner.api.discord.controller
 
 import ap.eventplanner.api.discord.application.LoginOAuthService
+import ap.eventplanner.api.discord.application.RoleAccessDeniedException
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.http.HttpStatus
@@ -30,8 +31,12 @@ class DiscordAuthController(
         request: HttpServletRequest,
         response: HttpServletResponse
     ) {
-        loginOAuthService.authenticate(code, request, response)
-        response.sendRedirect("/")
+        try {
+            loginOAuthService.authenticate(code, request, response)
+            response.sendRedirect("/")
+        } catch (e: RoleAccessDeniedException) {
+            response.sendRedirect("/?auth=failed")
+        }
     }
 
     @GetMapping("/status")
