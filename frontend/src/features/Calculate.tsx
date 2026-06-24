@@ -477,6 +477,12 @@ export default function Calculate() {
           </div>
 
           <div>
+            {t("calculate.result.songStartTransitionSeconds",
+              toTimeParts(result.songStartTransitionSeconds)
+            )}
+          </div>
+
+          <div>
             {t("calculate.result.remainingSeconds",
               toTimeParts(result.remainingSeconds)
             )}

@@ -7,6 +7,7 @@ data class PlayPlanResult (
     val stockSeconds: Int,
     val spendSeconds: Int,
     val startDashSeconds: Int,
+    val songStartTransitionSeconds: Int,
     val remainingTriggers: Int,
     val remainingSeconds: Int,
     val skipTicketStockPlayCount: Int,

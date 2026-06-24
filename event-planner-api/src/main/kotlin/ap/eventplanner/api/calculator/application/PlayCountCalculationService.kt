@@ -24,6 +24,7 @@ class PlayCountCalculationService(
             stockSeconds = operatingTime.stockDuration.inWholeSeconds.toInt(),
             spendSeconds = operatingTime.spendDuration.inWholeSeconds.toInt(),
             startDashSeconds = parameters.startDashDuration.inWholeSeconds.toInt(),
+            songStartTransitionSeconds = parameters.songStartTransitionDuration.inWholeSeconds.toInt(),
             remainingTriggers = remainingTriggers,
             remainingSeconds =
                 (

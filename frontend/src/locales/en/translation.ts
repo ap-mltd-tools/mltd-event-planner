@@ -66,6 +66,8 @@ export const en = {
           "Spend Time: {{h}}h {{m}}m {{s}}s",
         startDashSeconds:
           "Start Dash Time: {{h}}h {{m}}m {{s}}s (Equivalent to {{count}} stock plays)",
+        songStartTransitionSeconds:
+          "Transition time from song selection to event song start: {{h}}h {{m}}m {{s}}s",
         remainingSeconds:
           "Remaining Time: {{sign}}{{h}}h {{m}}m {{s}}s",
         remainingTriggers:

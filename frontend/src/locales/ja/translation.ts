@@ -64,6 +64,8 @@ export const ja = {
           "吐き時間：{{h}}時間 {{m}}分 {{s}}秒",
         startDashSeconds:
           "スタダ時間：{{h}}時間 {{m}}分 {{s}}秒(貯め{{count}}回分)",
+        songStartTransitionSeconds:
+          "選曲画面→イベント楽曲開始の遷移に使う時間：{{h}}時間 {{m}}分 {{s}}秒",
         remainingSeconds:
           "残り時間：{{sign}}{{h}}時間 {{m}}分 {{s}}秒",
         remainingTriggers:
