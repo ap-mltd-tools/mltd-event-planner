@@ -97,6 +97,10 @@
   margin-bottom: 16px;
 }
 
+.copy-button {
+  align-self: flex-end;
+}
+
 input {
   padding: 4px 8px;
 }

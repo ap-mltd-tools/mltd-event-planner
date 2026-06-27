@@ -1,6 +1,7 @@
 import { useState } from "react"
 import ApiError from "../Error"
 import { useTranslation } from "react-i18next"
+import { Copy } from "lucide-react"
 
 export default function Calculate() {
 
@@ -139,6 +140,47 @@ export default function Calculate() {
     e: React.WheelEvent<HTMLInputElement>
   ) => {
     e.currentTarget.blur()
+  }
+
+  const resultTexts = result
+  ? [
+      t("calculate.result.stockPlayCount", {
+        count: result.stockPlayCount,
+        skip: result.skipTicketStockPlayCount,
+      }),
+      t("calculate.result.spendPlayCount", {
+        count: result.spendPlayCount,
+        skip: result.skipTicketSpendPlayCount,
+        ten: result.tenTimesSpendPlayCount,
+      }),
+      t(
+        "calculate.result.stockSeconds",
+        toTimeParts(result.stockSeconds)
+      ),
+      t(
+        "calculate.result.spendSeconds",
+        toTimeParts(result.spendSeconds)
+      ),
+      t("calculate.result.startDashSeconds", {
+        ...toTimeParts(result.startDashSeconds),
+        count: result.startDashStockCount,
+      }),
+      t(
+        "calculate.result.songStartTransitionSeconds",
+        toTimeParts(result.songStartTransitionSeconds)
+      ),
+      t(
+        "calculate.result.remainingSeconds",
+        toTimeParts(result.remainingSeconds)
+      ),
+      t("calculate.result.remainingTriggers", {
+        count: result.remainingTriggers,
+      }),
+    ]
+  : [];
+
+  const copyResult = async () => {
+    await navigator.clipboard.writeText(resultTexts.join("\n"))
   }
 
   return (
@@ -436,64 +478,16 @@ export default function Calculate() {
         <div className="field">
           <h3>{t("calculate.result.title")}</h3>
 
-          <div>
-            {t("calculate.result.stockPlayCount",
-              {
-                count: result.stockPlayCount,
-                skip: result.skipTicketStockPlayCount
-              }
-            )}
+          <div className="copy-button">
+            <button onClick={copyResult}>
+              <Copy size={16} />
+            </button>
           </div>
 
-          <div>
-            {t("calculate.result.spendPlayCount",
-              {
-                count: result.spendPlayCount,
-                skip: result.skipTicketSpendPlayCount,
-                ten: result.tenTimesSpendPlayCount
-              }
-            )}
-          </div>
+          {resultTexts.map((text, index) => (
+            <div key={index}>{text}</div>
+          ))}
 
-          <div>
-            {t("calculate.result.stockSeconds",
-              toTimeParts(result.stockSeconds)
-            )}
-          </div>
-
-          <div>
-            {t("calculate.result.spendSeconds",
-              toTimeParts(result.spendSeconds)
-            )}
-          </div>
-
-          <div>
-            {t("calculate.result.startDashSeconds",
-              {
-              ...toTimeParts(result.startDashSeconds),
-              count: result.startDashStockCount
-              }
-            )}
-          </div>
-
-          <div>
-            {t("calculate.result.songStartTransitionSeconds",
-              toTimeParts(result.songStartTransitionSeconds)
-            )}
-          </div>
-
-          <div>
-            {t("calculate.result.remainingSeconds",
-              toTimeParts(result.remainingSeconds)
-            )}
-          </div>
-
-          <div>
-            {t("calculate.result.remainingTriggers",
-              {
-                count: result.remainingTriggers
-              })}
-          </div>
         </div>
       )}
   </>
