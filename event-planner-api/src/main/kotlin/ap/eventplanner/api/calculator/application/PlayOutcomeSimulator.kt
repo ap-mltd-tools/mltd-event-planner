@@ -55,4 +55,15 @@ class PlayOutcomeSimulator() {
                 parameters.tenTimesSpendPlayCount * tenTimesPlayAdditionalPoint +
                 parameters.initialTriggers
     }
+
+    /** 残り時間計算 */
+    fun calculateRemainingSeconds(
+        operatingTime: OptimalOperatingTime,
+        parameters: PlayCountCalculationParameters
+    ): Duration =
+        parameters.operatingDuration -
+                operatingTime.stockDuration -
+                operatingTime.spendDuration -
+                parameters.startDashDuration -
+                parameters.songStartTransitionDuration
 }

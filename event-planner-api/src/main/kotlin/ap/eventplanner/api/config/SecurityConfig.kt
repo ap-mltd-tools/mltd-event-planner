@@ -1,4 +1,4 @@
-package ap.eventplanner.api.discord.infrastructure.config
+package ap.eventplanner.api.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

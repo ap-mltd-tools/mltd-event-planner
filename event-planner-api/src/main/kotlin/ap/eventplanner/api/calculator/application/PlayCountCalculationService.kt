@@ -1,5 +1,6 @@
 package ap.eventplanner.api.calculator.application
 
+import ap.eventplanner.api.calculator.domain.OptimalPlayCounts
 import org.springframework.stereotype.Service
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
@@ -11,12 +12,14 @@ class PlayCountCalculationService(
 ) {
     fun calculatePlayPlan(input: PlayCountCalculationInput): PlayPlanResult {
         val parameters = input.toParameters()
-        val optimalPlayCounts = optimalPlayCountsCalculator.findOptimalPlayCounts(parameters)
-
-        val operatingTime = playOutcomeSimulator
+        val optimalPlayCounts : OptimalPlayCounts = optimalPlayCountsCalculator
+            .findOptimalPlayCounts(parameters)
+        val operatingTime: OptimalOperatingTime = playOutcomeSimulator
             .calculateOperatingTime(optimalPlayCounts, parameters)
-        val remainingTriggers = playOutcomeSimulator
+        val remainingTriggers: Int = playOutcomeSimulator
             .calculateRemainingTriggers(optimalPlayCounts, parameters)
+        val remainingSeconds: Duration = playOutcomeSimulator
+            .calculateRemainingSeconds(operatingTime, parameters)
 
         return PlayPlanResult(
             stockPlayCount = optimalPlayCounts.stockPlayCount,
@@ -26,16 +29,7 @@ class PlayCountCalculationService(
             startDashSeconds = parameters.startDashDuration.inWholeSeconds.toInt(),
             songStartTransitionSeconds = parameters.songStartTransitionDuration.inWholeSeconds.toInt(),
             remainingTriggers = remainingTriggers,
-            remainingSeconds =
-                (
-                    parameters.operatingDuration -
-                        operatingTime.stockDuration -
-                        operatingTime.spendDuration -
-                        parameters.startDashDuration -
-                        parameters.songStartTransitionDuration
-                )
-                    .inWholeSeconds
-                    .toInt(),
+            remainingSeconds = remainingSeconds.inWholeSeconds.toInt(),
             skipTicketStockPlayCount = if (parameters.skipTicketUsage == SkipTicketUsage.STOCK)
                 parameters.skipTicketPlayCount else 0,
             skipTicketSpendPlayCount = if (parameters.skipTicketUsage == SkipTicketUsage.SPEND)
