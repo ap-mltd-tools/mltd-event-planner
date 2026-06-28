@@ -97,6 +97,13 @@
   margin-bottom: 16px;
 }
 
+.field-description {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 2px;
+  white-space: pre-line;
+}
+
 .copy-button {
   align-self: flex-end;
 }

@@ -22,6 +22,11 @@ class OptimalPlayCountsCalculator() {
         val remainingDuration = parameters.operatingDuration -
                 specialOperationDuration
 
+        // 特殊操作時間が稼働時間を上回る場合、貯め吐きプレイ回数は0回とする
+        if (remainingDuration.isNegative()) {
+            return OptimalPlayCounts(0,0)
+        }
+
         val maxSpendPlayCount =
             (remainingDuration /
                     parameters.spendDurationPerPlay)

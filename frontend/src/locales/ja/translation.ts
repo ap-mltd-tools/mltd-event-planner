@@ -41,6 +41,22 @@ export const ja = {
         songStartTransitionSecond: "選曲画面→イベント楽曲開始の遷移にかかる時間",
       },
 
+      descriptions: {
+        stockPlaysPerHour: "",
+        spendPlaysPerHour: "",
+        operatingTime: "",
+        startDashCount: "リフレ中に貯めたチケットの消費を行う回数",
+        startDashTime: "リフレ中に貯めたチケットを消費しきるのにかかる時間",
+        skipTicketCount: "",
+        skipTicketsTime: "曲自体の秒数",
+        tenTimesCount: "",
+        dailyTrigger: "おすすめ楽曲+ログインボーナス(1日あたり4540個)",
+        initialTrigger: "",
+        targetRemainingTrigger: "",
+        songStartTransitionCount: "初回イベント楽曲スタート、10倍使用時、スキチケ使用時...\nまた、BOXからオーパス回収する場合やブースト使用でイベントTOPに戻る場合は2回分換算でカウントするのがおすすめです",
+        songStartTransitionSecond: "",
+      },
+
       options: {
         useForSpend: "吐きに使う",
         useForStock: "貯めに使う",

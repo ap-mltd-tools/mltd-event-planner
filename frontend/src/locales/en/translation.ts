@@ -43,6 +43,22 @@ export const en = {
           "Song Selection → Event Song Start Transition Duration",
       },
 
+      descriptions: {
+        stockPlaysPerHour: "",
+        spendPlaysPerHour: "",
+        operatingTime: "",
+        startDashCount: "Number of times to spend the tickets accumulated during the refresh period.",
+        startDashTime: "Time required to use all tickets accumulated during the refresh period.",
+        skipTicketCount: "",
+        skipTicketsTime: "Duration of the song itself.",
+        tenTimesCount: "",
+        dailyTrigger: "Recommended Song + Daily Login Bonus (4,540 triggers per day).",
+        initialTrigger: "",
+        targetRemainingTrigger: "",
+        songStartTransitionCount: "Count one transition for the first event song start, using 10x play, or using Skip Tickets.\nIf you collect an Auto Play Pass from the BOX or return to the event screen after using a boost, it is recommended to count those as two transitions.",
+        songStartTransitionSecond: "",
+      },
+
       options: {
         useForSpend: "Use for Spend",
         useForStock: "Use for Stock",

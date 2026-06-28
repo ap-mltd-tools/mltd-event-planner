@@ -11,8 +11,8 @@ export default function Calculate() {
   type SkipTicketUsage = "STOCK" | "SPEND"
 
   const [form, setForm] = useState({
-    stockPlaysPerHour: "17",
-    spendPlaysPerHour: "21",
+    stockPlaysPerHour: "17.1",
+    spendPlaysPerHour: "21.1",
 
     stockOperatingHour: "0",
     stockOperatingMinute: "0",
@@ -22,7 +22,7 @@ export default function Calculate() {
     operatingMinute: "0",
     operatingSecond: "0",
 
-    startDashMinutePerLap: "0",
+    startDashMinutePerLap: "10",
     startDashSecondPerLap: "0",
 
     skipTicketsMinutePerPlay: "0",
@@ -30,9 +30,9 @@ export default function Calculate() {
 
     songStartTransitionSecond: "15",
 
-    startDashCount: "0",
+    startDashCount: "1",
     skipTicketCount: "0",
-    tenTimesCount: "0",
+    tenTimesCount: "1",
     songStartTransitionCount: "1",
 
     dailyTrigger: "4540",
@@ -191,6 +191,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.stockPlaysPerHour")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.stockPlaysPerHour")}
+      </small>
       <input
         name="stockPlaysPerHour"
         placeholder=""
@@ -205,6 +208,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.spendPlaysPerHour")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.spendPlaysPerHour")}
+      </small>
       <input
         name="spendPlaysPerHour"
         placeholder=""
@@ -219,6 +225,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.operatingTime")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.operatingTime")}
+      </small>
       <div className="time-input-row">
         <div className="time-group">
           <input
@@ -265,6 +274,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.startDashCount")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.startDashCount")}
+      </small>
       <input
         name="startDashCount"
         placeholder=""
@@ -278,6 +290,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.startDashTime")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.startDashTime")}
+      </small>
       <div className="time-input-row">
         <div className="time-group">
           <input
@@ -311,6 +326,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.skipTicketCount")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.skipTicketCount")}
+      </small>
         <div className="radio-group">
           <label>
             <input
@@ -346,6 +364,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.skipTicketsTime")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.skipTicketsTime")}
+      </small>
       <div className="time-input-row">
         <div className="time-group">
           <input
@@ -379,6 +400,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.tenTimesCount")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.tenTimesCount")}
+      </small>
       <input
         name="tenTimesCount"
         placeholder=""
@@ -392,6 +416,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.dailyTrigger")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.dailyTrigger")}
+      </small>
       <input
         name="dailyTrigger"
         placeholder=""
@@ -406,6 +433,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.initialTrigger")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.initialTrigger")}
+      </small>
       <input
         name="initialTrigger"
         placeholder=""
@@ -420,6 +450,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.targetRemainingTrigger")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.targetRemainingTrigger")}
+      </small>
       <input
         name="targetRemainingTrigger"
         placeholder=""
@@ -434,6 +467,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.songStartTransitionCount")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.songStartTransitionCount")}
+      </small>
       <input
         name="songStartTransitionCount"
         placeholder=""
@@ -447,6 +483,9 @@ export default function Calculate() {
 
     <div className="field">
       <label>{t("calculate.labels.songStartTransitionSecond")}</label>
+      <small className="field-description">
+        {t("calculate.descriptions.songStartTransitionSecond")}
+      </small>
       <div className="time-input-row">
         <div className="time-group">
           <input
