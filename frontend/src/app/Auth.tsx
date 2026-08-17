@@ -7,6 +7,8 @@ export default function AuthPage() {
   const { t } =
     useTranslation()
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search)
 
@@ -29,7 +31,7 @@ export default function AuthPage() {
           className="login-button"
           onClick={() => {
             location.href =
-              "/discord/login"
+              `${API_BASE_URL}/discord/login`
           }}
         >
           {t("auth.discordLogin")}

@@ -7,12 +7,12 @@ import ApiError from "../Error"
 export default function App() {
     const [authenticated, setAuthenticated] =
     useState<boolean | null>(null)
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
 
   useEffect(() => {
-
     async function checkAuth() {
       try {
-        const res = await fetch("/discord/status", {
+        const res = await fetch(`${API_BASE_URL}/discord/status`, {
           credentials: "include"
         })
 
@@ -32,6 +32,7 @@ export default function App() {
         setAuthenticated(true)
 
       } catch(e) {
+        setAuthenticated(false)
         console.error(e)
         const message = 
         e instanceof ApiError

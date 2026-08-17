@@ -1,18 +1,5 @@
 :80 {
-
-    # Spring Boot API
-    handle /api/* {
-        reverse_proxy localhost:8080
-    }
-
-    handle /discord/* {
-        reverse_proxy localhost:8080
-    }
-
-    # React
-    handle {
-        root * /srv/react
-        try_files {path} /index.html
-        file_server
-    }
+    root * /srv/react
+    try_files {path} /index.html
+    file_server
 }

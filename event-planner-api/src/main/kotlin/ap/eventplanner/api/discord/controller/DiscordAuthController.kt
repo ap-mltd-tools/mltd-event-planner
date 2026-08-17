@@ -4,6 +4,7 @@ import ap.eventplanner.api.discord.application.LoginOAuthService
 import ap.eventplanner.api.discord.application.RoleAccessDeniedException
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.core.Authentication
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.RestController
 class DiscordAuthController(
     private val loginOAuthService: LoginOAuthService
 ) {
+    @Value("\${frontend.base-url}")
+    lateinit var frontendBaseUrl: String
+
     @GetMapping("/login")
     fun login(): ResponseEntity<Void> {
         return ResponseEntity
@@ -33,9 +37,9 @@ class DiscordAuthController(
     ) {
         try {
             loginOAuthService.authenticate(code, request, response)
-            response.sendRedirect("/")
+            response.sendRedirect("$frontendBaseUrl/")
         } catch (e: RoleAccessDeniedException) {
-            response.sendRedirect("/?auth=failed")
+            response.sendRedirect("$frontendBaseUrl/?auth=failed")
         }
     }
 

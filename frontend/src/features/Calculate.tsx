@@ -10,6 +10,8 @@ export default function Calculate() {
 
   type SkipTicketUsage = "STOCK" | "SPEND"
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
+
   const [form, setForm] = useState({
     stockPlaysPerHour: "17.1",
     spendPlaysPerHour: "21.1",
@@ -101,8 +103,9 @@ export default function Calculate() {
   };
   
   try {
-    const res = await fetch("/api/calculate", {
+    const res = await fetch(`${API_BASE_URL}/api/calculate`, {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
