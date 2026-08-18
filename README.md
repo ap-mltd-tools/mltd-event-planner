@@ -29,7 +29,7 @@ docker compose -f docker-compose.dev.yml -d --build
 This command starts all services, including the React frontend, Spring Boot backend, and Caddy.
 
 After the build is complete, please access the following URL.
-- https://localhost
+- https://frontend.localhost
 
 ## Authentication
 
