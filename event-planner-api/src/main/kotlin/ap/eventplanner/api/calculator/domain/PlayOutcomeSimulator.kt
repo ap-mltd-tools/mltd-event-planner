@@ -1,6 +1,5 @@
-package ap.eventplanner.api.calculator.application
+package ap.eventplanner.api.calculator.domain
 
-import ap.eventplanner.api.calculator.domain.OptimalPlayCounts
 import org.springframework.stereotype.Component
 import kotlin.time.Duration
 import kotlin.time.times
@@ -27,7 +26,7 @@ class PlayOutcomeSimulator() {
                 OptimalOperatingTime(
                     optimalPlayCounts.stockPlayCount *
                             parameters.stockDurationPerPlay -
-                            parameters.skipTicketsDuration,
+                            parameters.skippedPlayDuration,
                     optimalPlayCounts.spendPlayCount *
                             parameters.spendDurationPerPlay
                 )
@@ -37,7 +36,7 @@ class PlayOutcomeSimulator() {
                             parameters.stockDurationPerPlay,
                     optimalPlayCounts.spendPlayCount *
                             parameters.spendDurationPerPlay -
-                            parameters.skipTicketsDuration
+                            parameters.skippedPlayDuration
                 )
         }
     }

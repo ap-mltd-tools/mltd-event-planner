@@ -1,5 +1,6 @@
 ## MLTD event planner
 
+Screenshot shown is from a work in progress.
 ![Calculator1](docs/images/calculator1.png)
 ![Calculator2](docs/images/calculator2.png)
 

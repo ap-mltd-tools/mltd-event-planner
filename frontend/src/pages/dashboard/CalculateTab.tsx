@@ -1,17 +1,13 @@
 import { useState } from "react"
-import ApiError from "../Error"
+import ApiError from "../../shared/api/ApiError"
 import { useTranslation } from "react-i18next"
 import { Copy } from "lucide-react"
 
 export default function Calculate() {
 
-  const { t } =
-    useTranslation()
-
-  type SkipTicketUsage = "STOCK" | "SPEND"
-
+  const { t } = useTranslation()
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
-
+  type SkipTicketUsage = "STOCK" | "SPEND"
   const [form, setForm] = useState({
     stockPlaysPerHour: "17.1",
     spendPlaysPerHour: "21.1",
@@ -62,7 +58,6 @@ export default function Calculate() {
   const payload = {
     stockPlaysPerHour: toNumber(form.stockPlaysPerHour),
     spendPlaysPerHour: toNumber(form.spendPlaysPerHour),
-
     stockOperatingSeconds: toSeconds(
       form.stockOperatingHour,
       form.stockOperatingMinute,
@@ -73,7 +68,6 @@ export default function Calculate() {
       form.operatingMinute,
       form.operatingSecond
     ),
-
     startDashSecondsPerLap: toSeconds(
       undefined,
       form.startDashMinutePerLap,
@@ -89,54 +83,52 @@ export default function Calculate() {
       undefined,
       form.songStartTransitionSecond
     ),
-
     startDashPlayCount: toNumber(form.startDashCount),
     skipTicketPlayCount: toNumber(form.skipTicketCount),
     tenTimesSpendPlayCount: toNumber(form.tenTimesCount),
     songStartTransitionCount: toNumber(form.songStartTransitionCount),
-
     dailyAddedTriggers: toNumber(form.dailyTrigger),
     initialTriggers: toNumber(form.initialTrigger),
     targetRemainingTriggers: toNumber(form.targetRemainingTrigger),
-
     skipTicketUsage: form.skipTicketUsage
   };
   
-  try {
-    const res = await fetch(`${API_BASE_URL}/api/calculate`, {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/calculate`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+        if (res.status === 401) {
+        alert("再認証が必要です")
+        location.replace("/discord/login")
+        return
+      }
 
-      if (res.status === 401) {
-      alert("再認証が必要です")
-      location.replace("/discord/login")
-      return
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new ApiError(
+          data?.message ?? "サーバーエラーが発生しました",
+          res.status
+        )
+      }
+
+      setResult(data);
+      
+    } catch (e) {
+      console.error(e)
+      const message =
+        e instanceof ApiError
+          ? e.message
+          : "計算できませんでした"
+        alert(message)
+    } finally {
+        setLoading(false);
     }
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new ApiError(
-        data?.message ?? "サーバーエラーが発生しました",
-        res.status
-      )
-    }
-    setResult(data);
-  } catch (e) {
-    console.error(e)
-    const message =
-    e instanceof ApiError
-      ? e.message
-      : "計算できませんでした"
-      alert(message)
-  } finally {
-      setLoading(false);
-  }
   };
 
   const preventWheel = (

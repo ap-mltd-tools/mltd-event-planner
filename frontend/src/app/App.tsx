@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { useEffect } from "react"
-import AuthPage from "./Auth"
-import Dashboard from "./Dashboard"
-import ApiError from "../Error"
+import AuthPage from "../pages/Auth"
+import Dashboard from "../pages/dashboard/Dashboard"
+import ApiError from "../shared/api/ApiError"
 
 export default function App() {
     const [authenticated, setAuthenticated] =

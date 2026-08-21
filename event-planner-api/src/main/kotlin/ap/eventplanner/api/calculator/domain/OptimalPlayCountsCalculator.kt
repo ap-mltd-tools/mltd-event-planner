@@ -1,6 +1,5 @@
-package ap.eventplanner.api.calculator.application
+package ap.eventplanner.api.calculator.domain
 
-import ap.eventplanner.api.calculator.domain.OptimalPlayCounts
 import org.springframework.stereotype.Component
 import kotlin.math.abs
 import kotlin.time.Duration
@@ -18,7 +17,7 @@ class OptimalPlayCountsCalculator() {
         val specialOperationDuration: Duration =
             parameters.startDashDuration +
                     parameters.songStartTransitionDuration -
-                    parameters.skipTicketsDuration
+                    parameters.skippedPlayDuration
         val remainingDuration = parameters.operatingDuration -
                 specialOperationDuration
 

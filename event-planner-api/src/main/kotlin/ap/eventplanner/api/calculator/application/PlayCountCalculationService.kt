@@ -1,5 +1,11 @@
 package ap.eventplanner.api.calculator.application
 
+import ap.eventplanner.api.calculator.domain.AnniversaryEventConstants
+import ap.eventplanner.api.calculator.domain.OptimalOperatingTime
+import ap.eventplanner.api.calculator.domain.OptimalPlayCountsCalculator
+import ap.eventplanner.api.calculator.domain.PlayCountCalculationParameters
+import ap.eventplanner.api.calculator.domain.PlayOutcomeSimulator
+import ap.eventplanner.api.calculator.domain.SkipTicketUsage
 import ap.eventplanner.api.calculator.domain.OptimalPlayCounts
 import org.springframework.stereotype.Service
 import kotlin.time.Duration
@@ -46,7 +52,7 @@ class PlayCountCalculationService(
             spendDurationPerPlay = (secondsPerHour / spendPlaysPerHour).seconds,
             operatingDuration = operatingSeconds.seconds,
             startDashDuration = (startDashSecondsPerLap * startDashPlayCount).seconds,
-            skipTicketsDuration = (skipTicketsSecondsPerPlay * skipTicketPlayCount).seconds,
+            skippedPlayDuration = (skipTicketsSecondsPerPlay * skipTicketPlayCount).seconds,
             songStartTransitionDuration = (songStartTransitionSeconds * songStartTransitionCount).seconds,
 
             startDashPlayCount = startDashPlayCount,
@@ -60,19 +66,3 @@ class PlayCountCalculationService(
         )
     }
 }
-
-data class PlayCountCalculationParameters(
-    val stockDurationPerPlay: Duration,
-    val spendDurationPerPlay: Duration,
-    val operatingDuration: Duration,
-    val startDashDuration: Duration,
-    val skipTicketsDuration: Duration,
-    val songStartTransitionDuration: Duration,
-    val startDashPlayCount: Int,
-    val skipTicketPlayCount: Int,
-    val tenTimesSpendPlayCount: Int,
-    val dailyAddedTriggers: Int,
-    val initialTriggers: Int,
-    val targetRemainingTriggers: Int,
-    val skipTicketUsage: SkipTicketUsage
-)

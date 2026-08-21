@@ -1,6 +1,6 @@
 package ap.eventplanner.api.calculator.application
 
-/** 貯め吐き回数最適化結果 */
+/** 最適な貯め・吐き回数に基づく稼働計画の計算結果 */
 data class PlayPlanResult (
     val stockPlayCount: Int,
     val spendPlayCount: Int,

@@ -1,13 +1,12 @@
 import { useState } from "react"
-import Header from "../components/Header"
-import Calculate from "../features/Calculate"
-import Home from "../features/Home"
+import Header from "../../shared/ui/Header"
+import Calculate from "./CalculateTab"
+import Home from "./HomeTab"
 import { useTranslation } from "react-i18next"
 
 export default function Dashboard() {
 
-    const { t } =
-      useTranslation()
+    const { t } = useTranslation()
 
     type Tab =
   | "home"

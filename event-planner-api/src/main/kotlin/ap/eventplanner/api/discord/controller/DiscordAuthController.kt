@@ -61,4 +61,15 @@ class DiscordAuthController(
             )
         )
     }
+
+    @GetMapping("/debug")
+    fun debug(request: HttpServletRequest): ResponseEntity<String> {
+        val session = request.getSession(false)
+        return ResponseEntity.ok("""
+        sessionId = ${session.id}
+        creationTime = ${session.creationTime}
+        lastAccessedTime = ${session.lastAccessedTime}
+        maxInactiveInterval(sec) = ${session.maxInactiveInterval}
+        """.trimIndent())
+    }
 }
