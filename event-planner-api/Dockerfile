@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . .
 RUN gradle bootJar
 
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
 

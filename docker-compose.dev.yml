@@ -3,12 +3,28 @@ version: "3.9"
 services:
 
   spring:
-    build: ./event-planner-api
+    build:
+      context: ./event-planner-api
+      dockerfile: Dockerfile.dev
     ports:
       - "8080:8080"
+    volumes:
+      - ./event-planner-api:/app
     environment:
       SPRING_PROFILES_ACTIVE: dev
-      
+
+  react:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
   caddy:
     image: caddy:latest
     ports:
@@ -21,22 +37,6 @@ services:
     depends_on:
       - spring
       - react
-
-
-  react:
-    build:
-      context: ./frontend
-    ports:
-      - "5173:5173"
-
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    
-    command: npm run dev -- --host
 
 volumes:
   caddy_data:
