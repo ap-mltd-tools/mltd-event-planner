@@ -1,68 +1,95 @@
 import { useState } from "react"
 import ApiError from "../../shared/api/ApiError"
+import { API_BASE_URL } from "../../shared/config/env"
 import { useTranslation } from "react-i18next"
 import { Copy } from "lucide-react"
 
-export default function Calculate() {
+type SkipTicketUsage = "STOCK" | "SPEND"
 
-  const { t } = useTranslation()
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
-  type SkipTicketUsage = "STOCK" | "SPEND"
-  const [form, setForm] = useState({
-    stockPlaysPerHour: "17.1",
-    spendPlaysPerHour: "21.1",
+type CalculateFormState = {
+  stockPlaysPerHour: string
+  spendPlaysPerHour: string
 
-    stockOperatingHour: "0",
-    stockOperatingMinute: "0",
-    stockOperatingSecond: "0",
+  stockOperatingHour: string
+  stockOperatingMinute: string
+  stockOperatingSecond: string
 
-    operatingHour: "0",
-    operatingMinute: "0",
-    operatingSecond: "0",
+  operatingHour: string
+  operatingMinute: string
+  operatingSecond: string
 
-    startDashMinutePerLap: "10",
-    startDashSecondPerLap: "0",
+  startDashMinutePerLap: string
+  startDashSecondPerLap: string
 
-    skipTicketsMinutePerPlay: "0",
-    skipTicketsSecondPerPlay: "0",
+  skipTicketsMinutePerPlay: string
+  skipTicketsSecondPerPlay: string
 
-    songStartTransitionSecond: "15",
+  songStartTransitionSecond: string
 
-    startDashCount: "1",
-    skipTicketCount: "0",
-    tenTimesCount: "1",
-    songStartTransitionCount: "1",
+  startDashCount: string
+  skipTicketCount: string
+  tenTimesCount: string
+  songStartTransitionCount: string
 
-    dailyTrigger: "4540",
-    initialTrigger: "0",
-    targetRemainingTrigger: "0",
+  dailyTrigger: string
+  initialTrigger: string
+  targetRemainingTrigger: string
 
-    skipTicketUsage: "SPEND" as SkipTicketUsage,
-  });
-  const [result, setResult] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
+  skipTicketUsage: SkipTicketUsage
+}
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+const INITIAL_FORM: CalculateFormState = {
+  stockPlaysPerHour: "17.1",
+  spendPlaysPerHour: "21.1",
 
-  const handleSubmit = async () => {
-    setLoading(true)
+  stockOperatingHour: "0",
+  stockOperatingMinute: "0",
+  stockOperatingSecond: "0",
 
-  const payload = {
+  operatingHour: "0",
+  operatingMinute: "0",
+  operatingSecond: "0",
+
+  startDashMinutePerLap: "10",
+  startDashSecondPerLap: "0",
+
+  skipTicketsMinutePerPlay: "0",
+  skipTicketsSecondPerPlay: "0",
+
+  songStartTransitionSecond: "15",
+
+  startDashCount: "1",
+  skipTicketCount: "0",
+  tenTimesCount: "1",
+  songStartTransitionCount: "1",
+
+  dailyTrigger: "4540",
+  initialTrigger: "0",
+  targetRemainingTrigger: "0",
+
+  skipTicketUsage: "SPEND"
+}
+
+type PlayCountCalculationInput = {
+  stockPlaysPerHour: number
+  spendPlaysPerHour: number
+  operatingSeconds: number
+  startDashSecondsPerLap: number
+  skipTicketsSecondsPerPlay: number
+  songStartTransitionSeconds: number
+  startDashPlayCount: number
+  skipTicketPlayCount: number
+  tenTimesSpendPlayCount: number
+  songStartTransitionCount: number
+  dailyAddedTriggers: number
+  initialTriggers: number
+  targetRemainingTriggers: number
+  skipTicketUsage: SkipTicketUsage
+}
+
+const createPayload = (form: CalculateFormState): PlayCountCalculationInput => ({
     stockPlaysPerHour: toNumber(form.stockPlaysPerHour),
     spendPlaysPerHour: toNumber(form.spendPlaysPerHour),
-    stockOperatingSeconds: toSeconds(
-      form.stockOperatingHour,
-      form.stockOperatingMinute,
-      form.stockOperatingSecond
-    ),
     operatingSeconds: toSeconds(
       form.operatingHour,
       form.operatingMinute,
@@ -91,36 +118,120 @@ export default function Calculate() {
     initialTriggers: toNumber(form.initialTrigger),
     targetRemainingTriggers: toNumber(form.targetRemainingTrigger),
     skipTicketUsage: form.skipTicketUsage
+})
+
+async function calculate(payload: PlayCountCalculationInput): Promise<PlayPlanResult> {
+    const res = await fetch(`${API_BASE_URL}/api/calculate`, {
+    method: "POST",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await res.json();
+
+    if (!res.ok) {
+    throw new ApiError(
+      data?.message ?? "サーバーエラーが発生しました",
+      res.status
+    )
+  }
+
+  return data
+}
+
+type PlayPlanResult = {
+  stockPlayCount: number
+  spendPlayCount: number
+  stockSeconds: number
+  spendSeconds: number
+  startDashSeconds: number
+  songStartTransitionSeconds: number
+  remainingTriggers: number
+  remainingSeconds: number
+  skipTicketStockPlayCount: number
+  skipTicketSpendPlayCount: number
+  tenTimesSpendPlayCount: number
+  startDashStockCount: number
+}
+
+type TimeParts = {
+  sign: string
+  h: number
+  m: number
+  s: number
+}
+
+const preventWheel = (
+  e: React.WheelEvent<HTMLInputElement>
+) => {
+  e.currentTarget.blur()
+}
+
+function toTimeParts(seconds: number): TimeParts {
+  const sign = seconds < 0 ? "-" : ""
+  const abs = Math.abs(seconds)
+
+  const h = Math.floor(abs / 3600)
+  const m = Math.floor((abs %   3600) / 60)
+  const s = abs % 60
+
+  return {sign, h, m, s}
+}
+
+function toSeconds(
+  hour?: string,
+  minute?: string,
+  second?: string
+): number {
+  return (
+    Number(hour ?? 0) * 3600 +
+    Number(minute ?? 0) * 60 +
+    Number(second ?? 0)
+  )
+}
+
+function toNumber(v: string): number {
+  return v === "" ? 0 : Number(v);
+}
+
+export default function Calculate() {
+
+  const { t } = useTranslation()
+  const [form, setForm] = useState(INITIAL_FORM);
+  const [loading, setLoading] = useState(false);
+  const [result, setResult] = useState<PlayPlanResult | null>(null);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
-  
+
+  const handleSubmit = async () => {
+    setLoading(true)
+
+  const payload = createPayload(form);
+
     try {
-      const res = await fetch(`${API_BASE_URL}/api/calculate`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-        if (res.status === 401) {
+      const result = await calculate(payload)
+
+      setResult(result);
+    } catch (e) {
+      console.error(e)
+
+      if (e instanceof ApiError && e.status === 401) {
         alert("再認証が必要です")
-        location.replace("/discord/login")
+        location.replace(`${API_BASE_URL}/discord/login`)
         return
       }
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        throw new ApiError(
-          data?.message ?? "サーバーエラーが発生しました",
-          res.status
-        )
-      }
-
-      setResult(data);
-      
-    } catch (e) {
-      console.error(e)
       const message =
         e instanceof ApiError
           ? e.message
@@ -130,12 +241,6 @@ export default function Calculate() {
         setLoading(false);
     }
   };
-
-  const preventWheel = (
-    e: React.WheelEvent<HTMLInputElement>
-  ) => {
-    e.currentTarget.blur()
-  }
 
   const resultTexts = result
   ? [
@@ -526,38 +631,4 @@ export default function Calculate() {
       )}
   </>
   );
-}
-
-export type TimeParts = {
-  sign: string
-  h: number
-  m: number
-  s: number
-}
-
-export function toTimeParts(seconds: number): TimeParts {
-  const sign = seconds < 0 ? "-" : ""
-  const abs = Math.abs(seconds)
-
-  const h = Math.floor(abs / 3600)
-  const m = Math.floor((abs %   3600) / 60)
-  const s = abs % 60
-
-  return {sign, h, m, s}
-}
-
-export function toSeconds(
-  hour?: string,
-  minute?: string,
-  second?: string
-): number {
-  return (
-    Number(hour ?? 0) * 3600 +
-    Number(minute ?? 0) * 60 +
-    Number(second ?? 0)
-  )
-}
-
-export function toNumber(v: string): number {
-  return v === "" ? 0 : Number(v);
 }

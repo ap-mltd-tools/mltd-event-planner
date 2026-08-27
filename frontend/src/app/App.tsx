@@ -3,12 +3,11 @@ import { useEffect } from "react"
 import AuthPage from "../pages/Auth"
 import Dashboard from "../pages/dashboard/Dashboard"
 import ApiError from "../shared/api/ApiError"
+import { API_BASE_URL } from "../shared/config/env"
 
 export default function App() {
     const [authenticated, setAuthenticated] =
     useState<boolean | null>(null)
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL
-
   useEffect(() => {
     async function checkAuth() {
       try {
