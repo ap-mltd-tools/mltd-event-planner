@@ -38,6 +38,7 @@ type CalculateFormState = {
   skipTicketUsage: SkipTicketUsage;
 };
 
+const FORM_STORAGE_KEY = "event-planner.calculate-form";
 const INITIAL_FORM: CalculateFormState = {
   stockPlaysPerHour: "17.1",
   spendPlaysPerHour: "21.1",
@@ -191,16 +192,30 @@ function toTimeParts(seconds: number): TimeParts {
 
 export default function Calculate() {
   const { t } = useTranslation();
-  const [form, setForm] = useState(INITIAL_FORM);
+  const [form, setForm] = useState<CalculateFormState>(() => {
+    try {
+      const savedForm = localStorage.getItem(FORM_STORAGE_KEY);
+      return savedForm
+        ? {
+            ...INITIAL_FORM,
+            ...(JSON.parse(savedForm) as Partial<CalculateFormState>),
+          }
+        : INITIAL_FORM;
+    } catch {
+      return INITIAL_FORM;
+    }
+  });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<PlayPlanResult | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
+    const nextForm = {
+      ...form,
       [name]: value,
-    }));
+    };
+    setForm(nextForm);
+    localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(nextForm));
   };
 
   const handleSubmit = async () => {
