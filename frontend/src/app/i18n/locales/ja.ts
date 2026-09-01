@@ -18,8 +18,8 @@ export const ja = {
       description: "ミリシタ周年イベントの支援ツールを提供します。",
       contactTitle: "連絡先",
       contactLink: {
-        twitter: "X(旧Twitter)"
-      }
+        twitter: "X(旧Twitter)",
+      },
     },
 
     calculate: {
@@ -38,7 +38,8 @@ export const ja = {
         initialTrigger: "初期所持トリガー",
         targetRemainingTrigger: "目標残りトリガー",
         songStartTransitionCount: "選曲画面→イベント楽曲開始の遷移を行う回数",
-        songStartTransitionSecond: "選曲画面→イベント楽曲開始の遷移にかかる時間",
+        songStartTransitionSecond:
+          "選曲画面→イベント楽曲開始の遷移にかかる時間",
       },
 
       descriptions: {
@@ -53,7 +54,8 @@ export const ja = {
         dailyTrigger: "おすすめ楽曲+ログインボーナス(1日あたり4540個)",
         initialTrigger: "",
         targetRemainingTrigger: "",
-        songStartTransitionCount: "初回イベント楽曲スタート、10倍使用時、スキチケ使用時...\nまた、BOXからオーパス回収する場合やブースト使用でイベントTOPに戻る場合は2回分換算でカウントするのがおすすめです",
+        songStartTransitionCount:
+          "初回イベント楽曲スタート、10倍使用時、スキチケ使用時...\nまた、BOXからオーパス回収する場合やブースト使用でイベントTOPに戻る場合は2回分換算でカウントするのがおすすめです",
         songStartTransitionSecond: "",
       },
 
@@ -70,22 +72,17 @@ export const ja = {
 
       result: {
         title: "計算結果",
-        stockPlayCount:
-          "貯め回数：{{count}} 回 (内 スキチケ：{{skip}} 回)",
+        stockPlayCount: "貯め回数：{{count}} 回 (内 スキチケ：{{skip}} 回)",
         spendPlayCount:
           "吐き回数：{{count}} 回 (内 スキチケ：{{skip}} 回 ＆ 10倍吐き：{{ten}} 回)",
-        stockSeconds:
-          "貯め時間：{{h}}時間 {{m}}分 {{s}}秒",
-        spendSeconds:
-          "吐き時間：{{h}}時間 {{m}}分 {{s}}秒",
+        stockSeconds: "貯め時間：{{h}}時間 {{m}}分 {{s}}秒",
+        spendSeconds: "吐き時間：{{h}}時間 {{m}}分 {{s}}秒",
         startDashSeconds:
           "スタダ時間：{{h}}時間 {{m}}分 {{s}}秒(貯め{{count}}回分)",
         songStartTransitionSeconds:
           "選曲画面→イベント楽曲開始の遷移に使う時間：{{h}}時間 {{m}}分 {{s}}秒",
-        remainingSeconds:
-          "残り時間：{{sign}}{{h}}時間 {{m}}分 {{s}}秒",
-        remainingTriggers:
-          "残りトリガー：{{count}}個",
+        remainingSeconds: "残り時間：{{sign}}{{h}}時間 {{m}}分 {{s}}秒",
+        remainingTriggers: "残りトリガー：{{count}}個",
       },
     },
 
@@ -97,4 +94,4 @@ export const ja = {
       },
     },
   },
-}
+};

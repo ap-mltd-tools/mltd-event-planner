@@ -16,10 +16,10 @@ export const en = {
     home: {
       title: "Home",
       description: "A support tool for the Theater Days Anniversary Event.",
-    contactTitle: "Contact",
+      contactTitle: "Contact",
       contactLink: {
-        twitter: "X (formerly Twitter)"
-      }
+        twitter: "X (formerly Twitter)",
+      },
     },
 
     calculate: {
@@ -47,15 +47,19 @@ export const en = {
         stockPlaysPerHour: "",
         spendPlaysPerHour: "",
         operatingTime: "",
-        startDashCount: "Number of times to spend the tickets accumulated during the refresh period.",
-        startDashTime: "Time required to use all tickets accumulated during the refresh period.",
+        startDashCount:
+          "Number of times to spend the tickets accumulated during the refresh period.",
+        startDashTime:
+          "Time required to use all tickets accumulated during the refresh period.",
         skipTicketCount: "",
         skipTicketsTime: "Duration of the song itself.",
         tenTimesCount: "",
-        dailyTrigger: "Recommended Song + Daily Login Bonus (4,540 triggers per day).",
+        dailyTrigger:
+          "Recommended Song + Daily Login Bonus (4,540 triggers per day).",
         initialTrigger: "",
         targetRemainingTrigger: "",
-        songStartTransitionCount: "Count one transition for the first event song start, using 10x play, or using Skip Tickets.\nIf you collect an Auto Play Pass from the BOX or return to the event screen after using a boost, it is recommended to count those as two transitions.",
+        songStartTransitionCount:
+          "Count one transition for the first event song start, using 10x play, or using Skip Tickets.\nIf you collect an Auto Play Pass from the BOX or return to the event screen after using a boost, it is recommended to count those as two transitions.",
         songStartTransitionSecond: "",
       },
 
@@ -72,22 +76,17 @@ export const en = {
 
       result: {
         title: "Calculation Result",
-        stockPlayCount:
-          "Stock Plays: {{count}} (Skip Tickets: {{skip}})",
+        stockPlayCount: "Stock Plays: {{count}} (Skip Tickets: {{skip}})",
         spendPlayCount:
           "Spend Plays: {{count}} (Skip Tickets: {{skip}}, ×10 Plays: {{ten}})",
-        stockSeconds:
-          "Stock Time: {{h}}h {{m}}m {{s}}s",
-        spendSeconds:
-          "Spend Time: {{h}}h {{m}}m {{s}}s",
+        stockSeconds: "Stock Time: {{h}}h {{m}}m {{s}}s",
+        spendSeconds: "Spend Time: {{h}}h {{m}}m {{s}}s",
         startDashSeconds:
           "Start Dash Time: {{h}}h {{m}}m {{s}}s (Equivalent to {{count}} stock plays)",
         songStartTransitionSeconds:
           "Transition time from song selection to event song start: {{h}}h {{m}}m {{s}}s",
-        remainingSeconds:
-          "Remaining Time: {{sign}}{{h}}h {{m}}m {{s}}s",
-        remainingTriggers:
-          "Remaining Triggers: {{count}}",
+        remainingSeconds: "Remaining Time: {{sign}}{{h}}h {{m}}m {{s}}s",
+        remainingTriggers: "Remaining Triggers: {{count}}",
       },
     },
 
@@ -99,4 +98,4 @@ export const en = {
       },
     },
   },
-}
+};

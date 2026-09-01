@@ -1,23 +1,21 @@
-import i18n from "i18next"
-import { initReactI18next } from "react-i18next"
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
 
-import { ja } from "./locales/ja"
-import { en } from "./locales/en"
+import { ja } from "./locales/ja";
+import { en } from "./locales/en";
 
-i18n
-    .use(initReactI18next)
-    .init({
-        resources: {
-            ja,
-            en,
-        },
+i18n.use(initReactI18next).init({
+  resources: {
+    ja,
+    en,
+  },
 
-        lng: "ja",
-        fallbackLng: "ja",
+  lng: "ja",
+  fallbackLng: "ja",
 
-        interpolation: {
-            escapeValue: false
-        }
-    })
+  interpolation: {
+    escapeValue: false,
+  },
+});
 
-export default i18n
+export default i18n;

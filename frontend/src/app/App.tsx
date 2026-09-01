@@ -1,55 +1,48 @@
-import { useState } from "react"
-import { useEffect } from "react"
-import AuthPage from "../pages/Auth"
-import Dashboard from "../pages/dashboard/Dashboard"
-import ApiError from "../shared/api/ApiError"
-import { API_BASE_URL } from "../shared/config/env"
+import { useState } from "react";
+import { useEffect } from "react";
+import AuthPage from "../pages/Auth";
+import Dashboard from "../pages/dashboard/Dashboard";
+import ApiError from "../shared/api/ApiError";
+import { API_BASE_URL } from "../shared/config/env";
 
 export default function App() {
-    const [authenticated, setAuthenticated] =
-    useState<boolean | null>(null)
+  const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   useEffect(() => {
     async function checkAuth() {
       try {
         const res = await fetch(`${API_BASE_URL}/discord/status`, {
-          credentials: "include"
-        })
+          credentials: "include",
+        });
 
         if (res.status === 401) {
-          setAuthenticated(false)
-          return
+          setAuthenticated(false);
+          return;
         }
 
         if (!res.ok) {
           const data = await res.json();
           throw new ApiError(
             data?.message ?? "サーバーエラーが発生しました",
-            res.status
-          )
+            res.status,
+          );
         }
 
-        setAuthenticated(true)
-
-      } catch(e) {
-        setAuthenticated(false)
-        console.error(e)
-        const message = 
-        e instanceof ApiError
-          ? e.message
-          : "認証状態の取得に失敗しました"
-          alert(message)
+        setAuthenticated(true);
+      } catch (e) {
+        setAuthenticated(false);
+        console.error(e);
+        const message =
+          e instanceof ApiError ? e.message : "認証状態の取得に失敗しました";
+        alert(message);
       }
     }
 
-    checkAuth()
-
-  }, [])
+    checkAuth();
+  }, []);
 
   if (authenticated === null) {
-    return <>Loading...</>
+    return <>Loading...</>;
   }
 
-  return authenticated
-    ? <Dashboard />
-    : <AuthPage />
+  return authenticated ? <Dashboard /> : <AuthPage />;
 }
