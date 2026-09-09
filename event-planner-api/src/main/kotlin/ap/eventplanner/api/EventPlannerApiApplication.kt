@@ -1,9 +1,11 @@
 package ap.eventplanner.api
 
+import jakarta.validation.constraints.NotBlank
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
+import org.springframework.validation.annotation.Validated
 
 
 @SpringBootApplication
@@ -22,4 +24,11 @@ data class DiscordProperties(
 	val redirectUri: String,
 	val targetGuildIds: List<String>,
 	val targetRoleIds: List<String>
+)
+
+@Validated
+@ConfigurationProperties(prefix = "discord-bot-auth")
+data class DiscordBotAuthProperties(
+	@NotBlank
+	val token: String
 )

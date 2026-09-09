@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ApiError from "../../shared/api/ApiError";
-import { API_BASE_URL } from "../../shared/config/env";
 import {
   FORM_STORAGE_KEY,
   INITIAL_FORM,
@@ -75,13 +74,6 @@ export default function Calculate() {
       setResult(result);
     } catch (e) {
       console.error(e);
-
-      if (e instanceof ApiError && e.status === 401) {
-        alert("再認証が必要です");
-        location.replace(`${API_BASE_URL}/discord/login`);
-        return;
-      }
-
       const message =
         e instanceof ApiError ? e.message : "計算できませんでした";
       alert(message);

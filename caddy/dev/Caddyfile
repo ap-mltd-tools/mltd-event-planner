@@ -1,7 +1,12 @@
-frontend.localhost {
-    reverse_proxy react:5173
-}
+eventplanner.localhost {
+    @spring {
+        path /api/*
+        path /oauth2/*
+        path /login/oauth2/*
+        path /logout
+        path /discord/*
+    }
 
-backend.localhost {
-    reverse_proxy spring:8080
+    reverse_proxy @spring spring:8080
+    reverse_proxy react:5173
 }

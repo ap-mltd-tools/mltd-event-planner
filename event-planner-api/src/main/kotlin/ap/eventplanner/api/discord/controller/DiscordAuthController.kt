@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController
 class DiscordAuthController(
     private val loginOAuthService: LoginOAuthService
 ) {
-    @Value("\${frontend.base-url}")
-    lateinit var frontendBaseUrl: String
+    @Value("\${base-url}")
+    lateinit var baseUrl: String
 
     @GetMapping("/login")
     fun login(): ResponseEntity<Void> {
@@ -37,23 +37,16 @@ class DiscordAuthController(
     ) {
         try {
             loginOAuthService.authenticate(code, request, response)
-            response.sendRedirect("$frontendBaseUrl/")
+            response.sendRedirect("$baseUrl/")
         } catch (e: RoleAccessDeniedException) {
-            response.sendRedirect("$frontendBaseUrl/?auth=failed")
+            response.sendRedirect("$baseUrl/?auth=failed")
         }
     }
 
     @GetMapping("/status")
     fun status(
-        authentication: Authentication?
+        authentication: Authentication
     ): ResponseEntity<Any> {
-
-        if (authentication == null) {
-            return ResponseEntity
-                .status(401)
-                .build()
-        }
-
         return ResponseEntity.ok(
             mapOf(
                 "authenticated" to true,

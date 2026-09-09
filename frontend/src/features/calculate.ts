@@ -1,4 +1,3 @@
-import { API_BASE_URL } from "../shared/config/env";
 import ApiError from "../shared/api/ApiError";
 
 type SkipTicketUsage = "STOCK" | "SPEND";
@@ -144,7 +143,7 @@ function toSeconds(hour?: string, minute?: string, second?: string): number {
 export async function calculate(
   payload: PlayCountCalculationInput,
 ): Promise<PlayPlanResult> {
-  const res = await fetch(`${API_BASE_URL}/api/calculate`, {
+  const res = await fetch(`/api/calculate`, {
     method: "POST",
     credentials: "include",
     headers: {
@@ -153,14 +152,19 @@ export async function calculate(
     body: JSON.stringify(payload),
   });
 
-  const data = await res.json();
+  if (res.status === 401 || res.status === 403) {
+    // <AuthPage>に飛ばすようにしたい
+    window.location.href = "/oauth2/authorization/discord";
+    throw new ApiError("再認証が必要です", res.status);
+  }
 
   if (!res.ok) {
+    const data = await res.json();
     throw new ApiError(
       data?.message ?? "サーバーエラーが発生しました",
       res.status,
     );
   }
 
-  return data;
+  return res.json();
 }

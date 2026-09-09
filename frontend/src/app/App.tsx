@@ -3,19 +3,24 @@ import { useEffect } from "react";
 import AuthPage from "../pages/Auth";
 import Dashboard from "../pages/dashboard/Dashboard";
 import ApiError from "../shared/api/ApiError";
-import { API_BASE_URL } from "../shared/config/env";
 
 export default function App() {
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   useEffect(() => {
     async function checkAuth() {
       try {
-        const res = await fetch(`${API_BASE_URL}/discord/status`, {
+        const res = await fetch(`/discord/status`, {
           credentials: "include",
         });
 
         if (res.status === 401) {
           setAuthenticated(false);
+          return;
+        }
+
+        if (res.status === 403) {
+          setAuthenticated(false);
+          alert("アクセス権限が確認できませんでした");
           return;
         }
 
@@ -41,7 +46,7 @@ export default function App() {
   }, []);
 
   if (authenticated === null) {
-    return <>Loading...</>;
+    return <div translate="no">Loading...</div>;
   }
 
   return authenticated ? <Dashboard /> : <AuthPage />;

@@ -1,0 +1,16 @@
+# 本番用想定
+:{$PORT:3000} {
+    @spring {
+        path /api/*
+        path /oauth2/*
+        path /login/oauth2/*
+        path /logout
+        path /discord/*
+    }
+
+    reverse_proxy @spring spring.railway.internal:8080
+    
+    root * /srv/react
+    try_files {path} /index.html
+    file_server
+}

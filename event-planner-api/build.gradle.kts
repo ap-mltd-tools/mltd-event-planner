@@ -25,6 +25,7 @@ dependencies {
 
 	// Security
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
 
 	// Validation
 	implementation("org.springframework.boot:spring-boot-starter-validation")
@@ -38,6 +39,8 @@ dependencies {
 
 	// Test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
+	testImplementation("org.springframework.security:spring-security-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
 
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")

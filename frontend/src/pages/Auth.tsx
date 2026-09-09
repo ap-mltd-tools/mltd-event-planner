@@ -1,22 +1,8 @@
-import { useEffect } from "react";
 import Header from "../app/layouts/SiteLayout";
 import { useTranslation } from "react-i18next";
 
 export default function AuthPage() {
   const { t } = useTranslation();
-
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-
-    if (params.get("auth") === "failed") {
-      alert("アクセス権限が確認できませんでした");
-
-      params.delete("auth");
-      window.history.replaceState({}, "", "/");
-    }
-  }, []);
 
   return (
     <main className="app">
@@ -26,7 +12,7 @@ export default function AuthPage() {
         <button
           className="login-button"
           onClick={() => {
-            location.href = `${API_BASE_URL}/discord/login`;
+            location.href = `/oauth2/authorization/discord`;
           }}
         >
           {t("auth.discordLogin")}

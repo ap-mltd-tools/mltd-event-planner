@@ -37,13 +37,12 @@ class LoginOAuthService(
             }
             ?: throw RoleAccessDeniedException()
 
-        val auth = UsernamePasswordAuthenticationToken(
+        val context = SecurityContextHolder.createEmptyContext()
+        context.authentication = UsernamePasswordAuthenticationToken(
             userId,
             null,
             listOf(SimpleGrantedAuthority(role))
         )
-        val context = SecurityContextHolder.createEmptyContext()
-        context.authentication = auth
         SecurityContextHolder.setContext(context)
         securityContextRepository.saveContext(context, request, response)
     }
